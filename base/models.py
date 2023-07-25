@@ -34,7 +34,7 @@ class Room(models.Model):
         return self.name
 
     class Meta:
-        ordering = ('time_created', 'date_created')
+        ordering = ('time_modified', 'date_created')
 
 class Message(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -47,4 +47,4 @@ class Message(models.Model):
         return self.body[:50]
     
     class Meta:
-        ordering = ('time_created', 'date_created')
+        ordering = ('time_modified', 'date_created')
