@@ -26,7 +26,7 @@ class Room(models.Model):
     tag = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200)
     participants = models.ManyToManyField(User, related_name='participants', blank=True)
-    time_created = models.DateTimeField(auto_now=True)
+    time_modified = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
@@ -39,7 +39,7 @@ class Message(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     body = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
-    time_created = models.DateTimeField(auto_now=True)
+    time_modified = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
