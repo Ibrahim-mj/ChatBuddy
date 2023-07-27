@@ -1,0 +1,10 @@
+{% for tweet in tweets %}
+<div>
+    <small><a href="#">{{tweet.author}}</a> || {{tweet.date_created|timesince}}</small>
+    <p>{{tweet.body}}</p>
+    {% if tweet.tag %}
+    <a href="#">{{tweet.tag}}</a>
+    {% endif %}
+    <hr>
+</div>
+{% endfor %}
