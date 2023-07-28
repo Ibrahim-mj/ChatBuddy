@@ -1,0 +1,13 @@
+<h1>Trends For You</h1>
+<hr>
+<ol>
+    {% for tag in tags %}
+    <li>
+        <a href="#">
+            {{tag}}
+            {%  %}
+            <span>{{tag.tweet_set.all.count}} tweets</span>
+        </a>
+    </li>
+    {% endfor %}
+</ol>

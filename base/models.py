@@ -13,6 +13,7 @@ class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
     avatar = models.ImageField(null=True, default='avatar.svg')
     date_joined = models.DateTimeField(auto_now_add=True)
+    date_joined = models.DateTimeField()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name',]
@@ -25,6 +26,8 @@ class User(AbstractUser):
     #         return self.first_name
     #     return self.display_name
 
+# class Follow(models.Model):
+#     pass
 class Tag(models.Model):
     name = models.CharField(max_length=200)
 
@@ -33,9 +36,24 @@ class Tag(models.Model):
             return self.name
         return f'#{self.name}'
 
+    class Meta:
+        ordering = []
+
+
+class Topic(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+            return self.name
+
+    # class Meta:
+    #     ordering = []
+
+# I will add interests/topics later(for both tweets and rooms)
+
 class Room(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, null=True)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200)
     participants = models.ManyToManyField(User, related_name='participants', blank=True)
     time_modified = models.DateTimeField(auto_now=True)
@@ -67,6 +85,7 @@ class Tweet(models.Model):
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE, null=True, blank=True)
     time_modified = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    image = models.FileField(null=True, blank=True)
 
     class Meta:
         ordering = ('time_modified', 'date_created')

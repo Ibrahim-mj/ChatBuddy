@@ -1,6 +1,8 @@
+<h1>Your Feeds</h1>
+<hr>
 {% for tweet in tweets %}
 <div>
-    <small><a href="#">{{tweet.author}}</a> || {{tweet.date_created|timesince}}</small>
+    <small><a href="#">{{tweet.author}}</a> || {{tweet.date_created|timesince}} ago</small>
     <p>{{tweet.body}}</p>
     {% if tweet.tag %}
     <a href="#">{{tweet.tag}}</a>
