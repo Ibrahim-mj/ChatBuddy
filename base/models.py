@@ -13,7 +13,7 @@ class User(AbstractUser):
     bio = models.TextField(null=True, blank=True)
     avatar = models.ImageField(null=True, default='avatar.svg')
     date_joined = models.DateTimeField(auto_now_add=True)
-    date_joined = models.DateTimeField()
+    birthday = models.DateTimeField(null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name',]
@@ -108,4 +108,7 @@ class Comment(models.Model):
 
 
 # class Reactions(models.Model):
+#     pass
+
+# class Retweet(models.Model):
 #     pass

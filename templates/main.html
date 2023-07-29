@@ -1,5 +1,44 @@
 {% include 'navbar.html' %}
 
-{% block content %}
+<style>
+    .page-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
 
-{% endblock %}
+<div class="page-container">
+    <div>
+        <h2>Explore</h2>
+        <hr>
+        <h2>Messages</h2>
+        <hr>
+        <h2>Rooms</h2>
+        <hr>
+        <h2>Profile</h2>
+        <hr>
+        <h2>More</h2>
+
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    {% block content %}
+    <div>
+        
+    </div>
+
+    <div>
+        
+    </div>
+    {% endblock %}
+</div>
+
+
+

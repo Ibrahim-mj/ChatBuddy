@@ -2,34 +2,14 @@
 
 {% block content %}
 
-<style>
-    .tweet-container{
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-    }
-</style>
-
-<div class="tweet-container">
-    <div>
-        <h2>Explore</h2>
-        <hr>
-        <h2>Messages</h2>
-        <hr>
-        <h2>Rooms</h2>
-        <hr>
-        <h2>Profile</h2>
-        <hr>
-        <h2>More</h2>
-
-    </div>
-
-    <div>
-        {% include 'base/feed_component.html' %}
-    </div>
-
-    <div>
-        {% include 'base/trends_component.html' %}
-    </div>
+<div>
+    {% if request.user.is_authenticated %}
+    <h3>Hello {{user}}!</h3>
+    {% endif %}
+    {% include 'base/feed_component.html' %} 
+</div>
+<div>
+    {% include 'base/trends_component.html' %}
 </div>
 
 {% endblock %}
