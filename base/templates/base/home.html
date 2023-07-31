@@ -4,7 +4,7 @@
 
 <div>
     {% if request.user.is_authenticated %}
-    <h3>Hello {{user}}!</h3>
+    <h3>Hello {{user.username.title}}!</h3>
     {% endif %}
     {% include 'base/feed_component.html' %} 
 </div>

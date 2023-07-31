@@ -31,16 +31,17 @@ def signInPage(request):
 
         try:
             user = User.objects.get(email=email)
+
         except:
             messages.error(request, 'Email not found')
 
         user = authenticate(request, email=email, password=password)
-            # messages.error(request, 'Email or Password incorrect')
-
         if user is not None:
             login(request, user)
-            return redirect('home')
-        
+            return redirect('home') 
+        else:
+            messages.error(request, 'Email or Password incorrect')
+
     context = {
         'page': page
     }
