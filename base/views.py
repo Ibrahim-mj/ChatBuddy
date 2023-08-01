@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 from .models import User, Room, Tag, Message, Tweet, Comment
 from .forms import SignUpForm
@@ -47,6 +48,11 @@ def signInPage(request):
     }
     return render(request, 'base/signin_signup.html', context)
 
+def signOut(request):
+    logout(request)
+
+    return redirect('home')
+
 def signUpPage(request):
     form = SignUpForm()
 
@@ -55,6 +61,8 @@ def signUpPage(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+            user.first_name = user.first_name.title()
+            user.last_name = user.last_name.title()
             user.save()
             login(request, user)
 
@@ -67,3 +75,21 @@ def signUpPage(request):
     }
 
     return render(request, 'base/signin_signup.html', context)
+
+@login_required(login_url='/login')
+def deleteTweet(request, pk):
+    tweet = Tweet.objects.get(id=pk)
+    if request.method == 'POST':
+        tweet.delete()
+        return redirect('home')
+
+    context = {
+        'obj': tweet
+    }
+
+    return render(request, 'base/delete.html', context)
+
+# def deleteTweet(request, pk):
+#     tweet = Tweet.objects.get(id=pk)
+#     if request.method == 'POST':
+        

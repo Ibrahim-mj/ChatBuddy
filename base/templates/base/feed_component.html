@@ -7,6 +7,10 @@
     {% if tweet.tag %}
     <a href="#">{{tweet.tag}}</a>
     {% endif %}
+    {% if request.user == tweet.author %}
+    <a href="{% url 'delete-tweet' tweet.id %}">Delete Tweet</a>
+    <a href="{% url 'edit-tweet' tweet.id %}">Edit Tweet</a>
+    {% endif %}
     <hr>
 </div>
 {% endfor %}
