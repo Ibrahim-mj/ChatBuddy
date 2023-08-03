@@ -89,7 +89,10 @@ def deleteTweet(request, pk):
 
     return render(request, 'base/delete.html', context)
 
-# def deleteTweet(request, pk):
-#     tweet = Tweet.objects.get(id=pk)
-#     if request.method == 'POST':
-        
+def editTweet(request, pk):
+    tweet = Tweet.objects.get(id=pk)
+    if request.method == 'POST':
+        return redirect()
+
+def roomsPage(request):
+    pass
